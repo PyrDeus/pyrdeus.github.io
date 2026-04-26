@@ -118,6 +118,7 @@ h2 {
   grid-template-columns: minmax(320px, 2.2fr) minmax(180px, 1fr);
   gap: 1.5rem;
   align-items: stretch;
+  padding-right: 0.6rem;
 }
 
 .photo-card {
