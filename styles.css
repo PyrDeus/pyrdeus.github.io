@@ -1,15 +1,20 @@
 :root {
   color-scheme: dark;
+  --highlight: #2045bd;
+  --highlight-light: #476be2;
+  --highlight-dark: #002395;
   --lavender: #9a98ff;
   --lavender-soft: #b4b2ff;
   --lavender-deep: #6f6ad1;
-  --ink: #242124;
-  --panel: #242124;
+  --ink: #1c1a1c;
+  --panel: #1c1a1c;
   --table-bg: #2a2a2e;
   --table-hover: #5f5f73;
-  --text: #ffffff;
+  --text: #ffffffaf;
+  --header-text: #fffffffc;
   --muted: #d7d5ff;
-  --photo: #7a7a7a;
+  --table-line: 0.1px;
+  --layout-max: 1480px;
 }
 
 * {
@@ -24,19 +29,43 @@ body {
   font-size: 120%;
 }
 
+h1,
+h2 {
+  margin: 0;
+  font-family: "Impact", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+  color: var(--header-text);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 2.6rem);
+}
+
+h2 {
+  font-size: 1.9rem;
+  text-align: center;
+}
+
 .home {
   min-height: 100vh;
 }
 
 .topbar {
-  background: var(--lavender);
+  background: var(--highlight);
   color: #ffffff;
+  padding: 0;
+  border-bottom: 6px solid var(--highlight-dark);
+}
+
+.topbar-inner {
+  max-width: var(--layout-max);
+  margin: 0 auto;
+  padding: 0.9rem 0.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 0.9rem 1.5rem;
-  border-bottom: 6px solid var(--lavender-deep);
 }
 
 .brand {
@@ -53,6 +82,7 @@ body {
   gap: 0.75rem 0.8rem;
   align-items: center;
   font-size: 0.95rem;
+  font-family: "Segoe UI", "Tahoma", "Verdana", sans-serif;
 }
 
 .topnav a {
@@ -64,17 +94,19 @@ body {
 
 .topnav a:hover,
 .topnav a:focus {
-  text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
+  text-shadow:
+    0.5px 0 0 currentColor,
+    -0.5px 0 0 currentColor;
 }
 
 .topnav a + a {
-  border-left: 2px solid var(--lavender-deep);
+  border-left: 2px solid var(--highlight-dark);
   padding-left: 0.9rem;
   margin-left: 0.3rem;
 }
 
 .layout {
-  max-width: 1480px;
+  max-width: var(--layout-max);
   margin: 0 auto;
   padding: 1.8rem 0.6rem 3rem;
   display: grid;
@@ -89,8 +121,7 @@ body {
 }
 
 .photo-card {
-  background: var(--photo);
-  border: 3px solid var(--lavender);
+  border: 3px solid var(--highlight);
   color: #ffffff;
   display: grid;
   place-items: center;
@@ -100,9 +131,17 @@ body {
   font-size: 1.05rem;
 }
 
-.photo-card span {
-  font-size: 0.85rem;
-  color: #e8e8e8;
+.globe-card {
+  padding: 0.4rem;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 220px;
+}
+
+.globe-card canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .photo-stack {
@@ -111,14 +150,14 @@ body {
 }
 
 .photo-caption {
-  border: 1px solid var(--lavender);
+  border: 0px solid var(--highlight);
   padding: 0.6rem;
   text-align: center;
   font-size: 0.9rem;
 }
 
 .intro-card {
-  border: 1px solid var(--lavender);
+  border: 0px solid var(--highlight);
   background: var(--panel);
   padding: 1.2rem 1.5rem 1.4rem;
   display: grid;
@@ -128,20 +167,20 @@ body {
 }
 
 .intro-photo {
-  background: var(--photo);
-  border: 3px solid var(--lavender);
-  color: #ffffff;
+  border: 3px solid var(--highlight);
   display: grid;
   place-items: center;
   text-align: center;
   min-height: 180px;
-  padding: 0.8rem;
-  font-size: 0.95rem;
+  padding: 0.2rem;
 }
 
-.intro-photo span {
-  font-size: 0.8rem;
-  color: #e8e8e8;
+.intro-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 .intro-body {
@@ -149,24 +188,17 @@ body {
   gap: 0.9rem;
 }
 
-.intro-card h1 {
-  margin: 0;
-  font-family: "Impact", "Trebuchet MS", sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  letter-spacing: 0.03em;
-}
-
 .intro-line {
   width: 120px;
-  height: 1px;
-  background: var(--lavender);
+  height: 2px;
+  background: var(--highlight);
 }
 
 .intro-body p {
   margin: 0;
   line-height: 1.5;
   font-size: 0.95rem;
-  border-left: 3px solid var(--lavender);
+  border-left: 3px solid var(--highlight);
   padding-left: 0.8rem;
 }
 
@@ -183,20 +215,11 @@ body {
   gap: 0.9rem;
 }
 
-.panel h2 {
-  margin: 0;
-  text-align: center;
-  font-family: "Impact", "Trebuchet MS", sans-serif;
-  font-size: 1.7rem;
-  letter-spacing: 0.03em;
-  font-weight: 400;
-}
-
 .panel-line {
   width: 33.33%;
   height: 2px;
   margin: 0 auto;
-  background: var(--lavender);
+  background: var(--highlight);
 }
 
 .panel p {
@@ -204,12 +227,12 @@ body {
   max-width: 350px;
   font-size: 0.92rem;
   line-height: 1.4;
-  border-left: 3px solid var(--lavender);
+  border-left: 3px solid var(--highlight);
   padding-left: 0.8rem;
 }
 
 .panel-table {
-  border: 2px solid var(--lavender);
+  border: 1.5px solid var(--highlight);
   display: grid;
   gap: 0;
   background: var(--table-bg);
@@ -219,7 +242,7 @@ body {
 .panel-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
-  border-bottom: 2px solid var(--lavender);
+  border-bottom: var(--table-line) solid var(--highlight);
 }
 
 .panel-row:last-child {
@@ -229,7 +252,7 @@ body {
 .panel-row > * {
   padding: 0.5rem 0.6rem;
   font-size: 0.82rem;
-  border-right: 2px solid var(--lavender);
+  border-right: var(--table-line) solid var(--highlight);
 }
 
 .panel-row > :last-child {
@@ -263,40 +286,39 @@ body {
 
 .panel-more {
   text-decoration: none;
-  color: var(--lavender-soft);
+  color: var(--highlight-light);
   text-align: center;
-  text-transform: lowercase;
   letter-spacing: 0.08em;
   font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .panel-more:hover,
 .panel-more:focus {
-  text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
+  text-shadow:
+    0.5px 0 0 currentColor,
+    -0.5px 0 0 currentColor;
 }
 
 .simple-page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
   background: var(--ink);
   color: var(--text);
 }
 
-.simple-page h1 {
-  font-family: "Impact", "Trebuchet MS", sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  margin-bottom: 1rem;
+.simple-page-content {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-.simple-page a {
-  color: var(--lavender-soft);
-  text-decoration: none;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.simple-page-content div {
+  display: grid;
+  gap: 1rem;
 }
 
 @media (max-width: 900px) {
@@ -306,11 +328,6 @@ body {
 
   .panel-grid {
     grid-template-columns: 1fr;
-  }
-
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .topnav a + a {
